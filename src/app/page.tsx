@@ -1,7 +1,6 @@
 import ProductCard from "@/components/layouts/product-card";
 import { promises as fs } from "fs";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
 import CartList from "@/components/layouts/cart-list";
 
 export default async function Home() {
@@ -10,8 +9,6 @@ export default async function Home() {
     "utf-8"
   );
   const data = JSON.parse(file);
-
-  console.log(data);
 
   return (
     <main className=" bg-rose-50 p-8">

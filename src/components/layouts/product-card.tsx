@@ -22,9 +22,9 @@ const ProductCard = ({ products }: any) => {
   }, [isDesktop, isMobile]);
 
   const getImageSrc = (product: any) => {
-    if (isDesktop) return "/" + product?.image?.desktop;
-    if (isMobile) return "/" + product?.image?.mobile;
-    return "/" + product?.image?.tablet; // Default to tablet image for intermediate sizes
+    if (isDesktop) return product?.image?.desktop;
+    if (isMobile) return product?.image?.mobile;
+    return product?.image?.tablet;
   };
 
   return (
