@@ -57,7 +57,7 @@ const ConfirmButton = () => {
                   <TableRow key={item.name}>
                     <TableCell colSpan={3}>
                       <Image
-                        src={"/" + item?.image?.thumbnail}
+                        src={item?.image?.thumbnail}
                         width="64"
                         height="64"
                         priority={true}
