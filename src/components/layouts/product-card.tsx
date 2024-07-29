@@ -1,15 +1,32 @@
+"use client";
+
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import ButtonAddToChart from "./button-add-card";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { useEffect } from "react";
+
+const desktop = "(min-width: 1440px)";
+const mobile = "(max-width: 375px)";
 
 const ProductCard = ({ products }: any) => {
+  const isDesktop = useMediaQuery(desktop);
+  const isMobile = useMediaQuery(mobile);
+
+  useEffect(() => {
+    if (isDesktop) {
+      console.log("DESKTOP MODE");
+    } else if (isMobile) {
+      console.log("MOBILE MODE");
+    }
+  }, [isDesktop, isMobile]);
+
+  const getImageSrc = (product: any) => {
+    if (isDesktop) return "/" + product?.image?.desktop;
+    if (isMobile) return "/" + product?.image?.mobile;
+    return "/" + product?.image?.tablet; // Default to tablet image for intermediate sizes
+  };
+
   return (
     <>
       {products.map((product: any) => (
@@ -17,13 +34,14 @@ const ProductCard = ({ products }: any) => {
           key={product.name}
           className="border-none rounded-md bg-transparent shadow-none mb-8"
         >
-          <CardContent className="p-0 ">
+          <CardContent className="p-0">
             <Image
-              alt="produc image"
-              width={1000}
-              height={1000}
-              className="rounded-md hover:border-2 hover:border-rose-900"
-              src={"/" + product?.image?.desktop}
+              alt="product image"
+              width={500}
+              height={500}
+              priority={true}
+              className="rounded-md  w-full object-cover hover:border-2 hover:border-rose-900"
+              src={getImageSrc(product)}
             />
             <div className="grid">
               <div className="flex w-full justify-center">
@@ -34,7 +52,7 @@ const ProductCard = ({ products }: any) => {
                 <p className="font-redhat text-rose-900 font-bold text-lg text-nowrap">
                   {product?.name}
                 </p>
-                <p className="font-redhat text-rose-500  text-base font-bold">
+                <p className="font-redhat text-rose-500 text-base font-bold">
                   {"$ " + product?.price}
                 </p>
               </div>

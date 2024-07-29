@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google";
 import "../styles/globals.css";
 import { cn } from "@/lib/utils";
 import { fontRedHat } from "@/styles/font";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,7 +29,8 @@ export default function RootLayout({
           fontRedHat.variable
         )}
       >
-        {children}
+        <main>{children}</main>
+        <Toaster closeButton richColors position="bottom-left" />
       </body>
     </html>
   );
